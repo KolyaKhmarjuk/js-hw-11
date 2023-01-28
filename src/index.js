@@ -9,7 +9,12 @@ const onSearch = e => {
   e.preventDefault();
   const input = e.currentTarget.searchQuery.value;
 
-  console.log(input);
+  fetchGalley(input);
 };
+
+// const renderListImage = res => {
+//   const markup = markupList(res);
+//   refs.galerry.insertAdjacentHTML = markup;
+// };
 
 refs.form.addEventListener('submit', onSearch);
