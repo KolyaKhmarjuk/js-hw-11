@@ -1,8 +1,22 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
+.container{
+    padding-left: 50;
+    padding-right: 50;
+}
+
 .search-form {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
+.gallery-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-card{
+    width: 350;
+    height: 250;
+}
