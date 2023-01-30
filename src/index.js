@@ -2,7 +2,6 @@ import { refs } from './refs';
 import ApiService from './api/api';
 import { getMarkupImage } from './markup/markupListGallery';
 import { Notify } from 'notiflix';
-
 const apiService = new ApiService();
 
 refs.form.addEventListener('submit', onSearch);
@@ -10,20 +9,22 @@ refs.loadMore.addEventListener('click', onLoadMore);
 
 
 
+  
 async function onSearch(e) {
   e.preventDefault();
   clearHitsList();
   apiService.query = e.currentTarget.elements.searchQuery.value;
+
+  const { hits, totalHits } = await apiService.fetchData();
+  
+  appendHitsMarkup(hits);
 
   if (apiService.query === '') {
     refs.loadMore.setAttribute('hidden', true);
     return Notify.info('Enter something to search');
   }
 
-  const data = apiService.fetchData();
-  
   apiService.resetPage();
-  apiService.fetchData().then(appendHitsMarkup);
 
   refs.loadMore.removeAttribute('hidden');
   refs.loadMore.textContent = 'Загрузка...';
@@ -35,8 +36,10 @@ async function onSearch(e) {
   }, 1000)
 }
 
-function onLoadMore() {
-  apiService.fetchData().then(appendHitsMarkup);
+async function onLoadMore() {
+  apiService.incrementPage();
+  const { hits } = await apiService.fetchData();
+  appendHitsMarkup(hits);
 }
 
 function appendHitsMarkup(hits) {

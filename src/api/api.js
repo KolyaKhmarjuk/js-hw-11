@@ -12,17 +12,21 @@ export default class ApiService {
 
   async fetchData() {
     try {
-      const res = await axios.get(
+      const response = await axios.get(
         `${BASE_URL}${KEY}q=${this.searchQuery}&${PARAMS}${PER_PAGE}&page=${this.page}`
       );
-      this.page += 1;
-
-      const { hits } = res.data;
       
-      return hits;
+      const data = response.data;
+      console.log(data);
+      return data;
+      
     } catch (error) {
       console.log(error);
     }
+  }
+
+  incrementPage() {
+    this.page += 1;
   }
 
   resetPage() {

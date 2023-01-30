@@ -1,5 +1,5 @@
-const getMarkupImage = image => {
-  const markupList = image.map(
+const getMarkupImage = hits => {
+  const markupList = hits.map(
     ({
       webformatURL,
       largeImageURL,
