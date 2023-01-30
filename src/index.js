@@ -1,26 +1,19 @@
-import { fetchData } from './api/api';
 import { refs } from './refs';
-import { getMarkupImage } from './markup/markupListGallery';
-import Notiflix, { Notify } from 'notiflix';
+import ApiService from './api/api';
 
-// let page = 1;
-// let limitPage = 40;
-// const totalPage = 100 / limitPage;
+const apiService = new ApiService();
 
 const onSearch = async e => {
   e.preventDefault();
-  const inputValue = e.currentTarget.searchQuery.value;
+  apiService.query = e.currentTarget.searchQuery.value;
 
-  const res = await fetchData(inputValue);
-  const markup = getMarkupImage(res);
-  refs.galerry.insertAdjacentHTML('beforeend', markup);
-
-  if (markup.length === 0) {
-    Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-    refs.galerry.innerHTML = '';
-  }
+  apiService.fetchData();
 };
 
+const onLoadMore = () => {
+  apiService.fetchData();
+}
+
 refs.form.addEventListener('submit', onSearch);
+refs.loadMore.addEventListener('click', onLoadMore)
+
