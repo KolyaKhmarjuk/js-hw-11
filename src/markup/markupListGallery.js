@@ -1,5 +1,5 @@
-const getMarkupImage = response => {
-  const markupList = response.map(
+const getMarkupImage = data => {
+  const markupList = data.map(
     ({
       webformatURL,
       largeImageURL,
