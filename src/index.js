@@ -23,8 +23,8 @@ function onLoadMore() {
   apiService.fetchData().then(appendHitsMarkup);
 }
 
-function appendHitsMarkup(data) {
-  refs.galerry.insertAdjacentHTML('beforeend', getMarkupImage(data));
+function appendHitsMarkup(hits) {
+  refs.galerry.insertAdjacentHTML('beforeend', getMarkupImage(hits));
 }
 
 function clearHitsList() {
