@@ -27,6 +27,7 @@ p {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .photo-card {
@@ -41,7 +42,9 @@ p {
     flex-wrap: wrap;
     margin-top: -20px;
     margin-left: -20px;
+    margin-bottom: 20px;
     padding: 0 10px;
+
 }
 
 .info{
@@ -58,6 +61,20 @@ p {
     font-family: sans-serif;
     font-size: 17px;
 }
+
+.load-more{
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 130px;
+    height: 30px;
+}
+
+.is-disabled{
+    display: none;
+}
+
+
 
 
 
