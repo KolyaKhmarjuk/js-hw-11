@@ -5,15 +5,14 @@ const apiService = new ApiService();
 
 const onSearch = async e => {
   e.preventDefault();
-  apiService.query = e.currentTarget.searchQuery.value;
+  apiService.query = e.currentTarget.elements.searchQuery.value;
 
   apiService.fetchData();
 };
 
 const onLoadMore = () => {
   apiService.fetchData();
-}
+};
 
 refs.form.addEventListener('submit', onSearch);
-refs.loadMore.addEventListener('click', onLoadMore)
-
+refs.loadMore.addEventListener('click', onLoadMore);
