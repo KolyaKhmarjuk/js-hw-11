@@ -8,6 +8,8 @@ const apiService = new ApiService();
 refs.form.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
 
+
+
 async function onSearch(e) {
   e.preventDefault();
   clearHitsList();
@@ -18,15 +20,19 @@ async function onSearch(e) {
     return Notify.info('Enter something to search');
   }
 
+  const data = apiService.fetchData();
+  
   apiService.resetPage();
   apiService.fetchData().then(appendHitsMarkup);
 
   refs.loadMore.removeAttribute('hidden');
   refs.loadMore.textContent = 'Загрузка...';
 
-  if (apiService.query.length > 1) {
+  setTimeout(() => {
+    if (apiService.query.length > 1) {
     refs.loadMore.textContent = 'Load more';
   }
+  }, 1000)
 }
 
 function onLoadMore() {

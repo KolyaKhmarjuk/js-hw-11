@@ -18,6 +18,7 @@ export default class ApiService {
       this.page += 1;
 
       const { hits } = res.data;
+      
       return hits;
     } catch (error) {
       console.log(error);
