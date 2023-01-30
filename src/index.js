@@ -1,6 +1,7 @@
 import { refs } from './refs';
 import ApiService from './api/api';
 import { getMarkupImage } from './markup/markupListGallery';
+import { Notify } from 'notiflix';
 
 const apiService = new ApiService();
 
@@ -9,7 +10,11 @@ refs.loadMore.addEventListener('click', onLoadMore);
 
 async function onSearch(e) {
   e.preventDefault();
+  clearHitsList();
   apiService.query = e.currentTarget.elements.searchQuery.value;
+  if (apiService.query === '') {
+    return Notify.info('Enter something to search');
+  }
   apiService.resetPage();
   apiService.fetchData().then(appendHitsMarkup);
 }
@@ -20,4 +25,8 @@ function onLoadMore() {
 
 function appendHitsMarkup(data) {
   refs.galerry.insertAdjacentHTML('beforeend', getMarkupImage(data));
+}
+
+function clearHitsList() {
+  refs.galerry.innerHTML = '';
 }
