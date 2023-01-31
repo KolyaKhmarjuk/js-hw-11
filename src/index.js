@@ -37,7 +37,7 @@ async function onSearch(e) {
 }
 
 async function onLoadMore() {
-  apiService.incrementPage();
+  apiService.incrementPage()
   const { hits } = await apiService.fetchData();
   appendHitsMarkup(hits);
 }
