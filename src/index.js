@@ -5,8 +5,8 @@ import ApiService from './api/api';
 import { getMarkupImage } from './markup/markupListGallery';
 import { Notify } from 'notiflix';
 
-const apiService = new ApiService();
 const lightbox = new SimpleLightbox('.img_gallary');
+const apiService = new ApiService();
 
 refs.form.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
@@ -14,11 +14,10 @@ refs.loadMore.setAttribute('hidden', true);
 
 async function onSearch(e) {
   e.preventDefault();
-
+  apiService.resetPage();
+  refs.galerry.innerHTML = '';
   apiService.query = e.currentTarget.elements.searchQuery.value;
   const { hits, totalHits } = await apiService.fetchData();
-
-  refs.galerry.innerHTML = '';
 
   if (hits.length === 0) {
     Notify.failure(
@@ -28,8 +27,9 @@ async function onSearch(e) {
   }
 
   appendHitsMarkup(hits);
+  scrollByGallary(0);
   refs.loadMore.removeAttribute('hidden');
-  apiService.resetPage();
+
   lightbox.refresh();
   Notify.success(`Hooray! We found ${totalHits} images.`);
 
@@ -40,6 +40,7 @@ async function onLoadMore() {
   apiService.incrementPage();
   const { hits } = await apiService.fetchData();
   appendHitsMarkup(hits);
+  scrollByGallary(1);
   lightbox.refresh();
   amountHits(hits);
 }
@@ -58,11 +59,12 @@ function amountHits(hits) {
   }
 }
 
-const { height: cardHeight } = document
-  .querySelector('.gallery-list')
-  .firstElementChild.getBoundingClientRect();
+function scrollByGallary(number) {
+  const { height: cardHeight } =
+    refs.galerry.firstElementChild.getBoundingClientRect();
 
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: 'smooth',
-});
+  window.scrollBy({
+    top: cardHeight * number,
+    behavior: 'smooth',
+  });
+}
