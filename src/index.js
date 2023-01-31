@@ -57,3 +57,12 @@ function amountHits(hits) {
     return;
   }
 }
+
+const { height: cardHeight } = document
+  .querySelector('.gallery-list')
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: 'smooth',
+});

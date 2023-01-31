@@ -1,6 +1,7 @@
 body {
     justify-content: center;
     text-align: center;
+    margin-top: 80;
 }
 
 img {
@@ -21,11 +22,23 @@ p {
     margin-bottom: 10;
 }
 
+header{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    padding-top: 15;
+    padding-bottom: 15;
+    background-color:royalblue;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+            1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
 .search-form {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+    
 }
 
 .photo-card {
@@ -60,20 +73,22 @@ p {
 }
 
 input{
-    border-color: lightseagreen;
+    position: relative;
     border-radius: 5px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-                1px 4px 6px rgba(0, 0, 0, 0.16);
+    border: none;
+    width: 250;
+    height: 30;
+    background-color: white;
 }
 
 .submit{
     cursor: pointer;
+    height: 30;
     border: none;
+    border-radius: 5;
     margin-left: 15;
-    background-color: lightseagreen;
-    border-radius: 5px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-                1px 4px 6px rgba(0, 0, 0, 0.16);
+    background-color: white;
+
 }
 
 .load-more {
@@ -82,7 +97,7 @@ input{
     margin-bottom: 50px;
     width: 130px;
     height: 30px;
-    background-color: lightseagreen;
+    background-color: royalblue;
     border: none;
     border-radius: 5px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
