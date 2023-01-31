@@ -15,11 +15,9 @@ export default class ApiService {
       const response = await axios.get(
         `${BASE_URL}${KEY}q=${this.searchQuery}&${PARAMS}${PER_PAGE}&page=${this.page}`
       );
-      
+
       const data = response.data;
-      console.log(data);
       return data;
-      
     } catch (error) {
       console.log(error);
     }
