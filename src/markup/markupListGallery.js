@@ -33,7 +33,9 @@ const getMarkupImage = hits => {
         largeImageURL,
       }) =>
         `<div class="photo-card">
-        <a class="img_gallary" href="${largeImageURL}" src="${webformatURL}" alt="${tags}" loading="lazy" >   </a>
+        <a class="img_gallary" href="${largeImageURL}">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+        </a>
         <div class="info">
           <li class="info-item">
             <b>Likes</b>

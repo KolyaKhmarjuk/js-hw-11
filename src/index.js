@@ -1,12 +1,12 @@
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from 'simplelightbox';
 import { refs } from './refs';
 import ApiService from './api/api';
 import { getMarkupImage } from './markup/markupListGallery';
 import { Notify } from 'notiflix';
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 const apiService = new ApiService();
+const lightbox = new SimpleLightbox('.img_gallary');
 
 refs.form.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
@@ -39,6 +39,7 @@ async function onLoadMore() {
   apiService.incrementPage();
   appendHitsMarkup(hits);
   hitsAmount(hits);
+  lightbox.refresh();
 }
 
 function appendHitsMarkup(hits) {
@@ -56,4 +57,5 @@ function hitsAmount(hits) {
     );
     refs.loadMore.setAttribute('hidden', true);
   }
+  lightbox.refresh();
 }
