@@ -10,6 +10,7 @@ const lightbox = new SimpleLightbox('.img_gallary');
 
 refs.form.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
+refs.loadMore.setAttribute('hidden', true);
 
 async function onSearch(e) {
   e.preventDefault();
@@ -17,46 +18,42 @@ async function onSearch(e) {
   apiService.query = e.currentTarget.elements.searchQuery.value;
   const { hits, totalHits } = await apiService.fetchData();
 
+  refs.galerry.innerHTML = '';
+
   if (hits.length === 0) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-    refs.loadMore.setAttribute('hidden', true);
+    return;
   }
 
-  if (hits.length > 1) {
-    Notify.success(`Hooray! We found ${totalHits} images.`);
-    refs.loadMore.removeAttribute('hidden');
-  }
-
-  clearHitsList();
   appendHitsMarkup(hits);
+  refs.loadMore.removeAttribute('hidden');
   apiService.resetPage();
   lightbox.refresh();
+  Notify.success(`Hooray! We found ${totalHits} images.`);
+
+  amountHits(hits);
 }
 
 async function onLoadMore() {
-  const { hits } = await apiService.fetchData();
   apiService.incrementPage();
+  const { hits } = await apiService.fetchData();
   appendHitsMarkup(hits);
-  hitsAmount(hits);
   lightbox.refresh();
+  amountHits(hits);
 }
 
 function appendHitsMarkup(hits) {
   refs.galerry.insertAdjacentHTML('beforeend', getMarkupImage(hits));
 }
 
-function clearHitsList() {
-  refs.galerry.innerHTML = '';
-}
-
-function hitsAmount(hits) {
+function amountHits(hits) {
   if (hits.length < 40) {
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
     refs.loadMore.setAttribute('hidden', true);
+    return;
   }
-  lightbox.refresh();
 }
