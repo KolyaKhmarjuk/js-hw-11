@@ -32,6 +32,7 @@ async function onSearch(e) {
   clearHitsList();
   appendHitsMarkup(hits);
   apiService.resetPage();
+  lightbox.refresh();
 }
 
 async function onLoadMore() {
